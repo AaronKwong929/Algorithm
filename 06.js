@@ -21,3 +21,6 @@ var reversePrint = function (head) {
   }
   return result;
 };
+
+// 栈先进后出
+// 倒序构造数组并输出 空间O2n了
