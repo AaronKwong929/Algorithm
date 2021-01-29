@@ -13,7 +13,7 @@
 var buildTree = function (preorder, inorder) {
   if (!preorder.length || !inorder.length) return null;
 
-  var rootVal = preorder[0].val;
+  var rootVal = preorder[0];
   var treeNode = new TreeNode(rootVal);
 
   let i = 0; // i有两个含义，一个是根节点在中序遍历结果中的下标，另一个是当前左子树的节点个数
@@ -24,10 +24,10 @@ var buildTree = function (preorder, inorder) {
   }
 
   // 左半部分个数为i
-  node.left = buildTree(preorder.slice(1, i + 1), inorder.slice(0, i));
+  treeNode.left = buildTree(preorder.slice(1, i + 1), inorder.slice(0, i));
   // 右半部分从i+1开始
-  node.right = buildTree(preorder.slice(i + 1), inorder.slice(i + 1));
-  return node;
+  treeNode.right = buildTree(preorder.slice(i + 1), inorder.slice(i + 1));
+  return treeNode;
 };
 
 //  pre 1 2 4 5 3    in 4 2 5 1 3
