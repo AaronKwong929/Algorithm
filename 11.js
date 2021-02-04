@@ -30,3 +30,24 @@ var minArray2 = function (numbers) {
     }
     return numbers[0];
 };
+
+/**
+ *
+ * @param {number[]} numbers
+ * @return {number}
+ */
+const minArray3 = (numbers) => {
+    let left = 0,
+        right = numbers.length - 1;
+    while (left < right) {
+        const mid = Math.floor(left + (right - left) / 2);
+        if (numbers[mid] > numbers[right]) {
+            left = mid + 1;
+        } else if (numbers[mid] === numbers[right]) {
+            right--;
+        } else {
+            right = mid;
+        }
+    }
+    return numbers[left];
+};
