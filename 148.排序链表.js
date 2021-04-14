@@ -20,20 +20,14 @@ var sortList = function (head) {
     if (!head || !head.next) return head;
     let slow = head,
         fast = head;
-    // 快慢指针 结束循环时慢指针指向链表中间
     while (slow.next && fast.next && fast.next.next) {
         slow = slow.next;
         fast = fast.next.next;
     }
-    // middle 存起slow指针后续部分
-    const middle = slow.next;
-    // 断开slow
+    let middle = slow.next;
     slow.next = null;
-
-    // 分开左右两部分
-    const left = head,
+    let left = head,
         right = middle;
-    // 归并 递归处理到当前left / right只有一个节点
     return merge(sortList(left), sortList(right));
 };
 
@@ -42,19 +36,19 @@ var sortList = function (head) {
  * 其实就是拆分成一个一个 [x] [y]，进行内部排序 组成一个完整的链表
  */
 const merge = (left, right) => {
-    const tmp = new ListNode(0);
+    const dummy = new ListNode(0);
     let p1 = left,
         p2 = right,
-        p = tmp;
-
+        p = dummy;
     while (p1 && p2) {
-        // 构建排序链表 - 断开单个，接入到新位置，目标链表指针移动
         if (p1.val < p2.val) {
+            // p1 较小，接入p1
             const temp = p1.next;
             p1.next = null;
             p.next = p1;
             p1 = temp;
         } else {
+            // p2较小，接入p2
             const temp = p2.next;
             p2.next = null;
             p.next = p2;
@@ -62,10 +56,9 @@ const merge = (left, right) => {
         }
         p = p.next;
     }
-    // 接上剩余链表
     if (p1) p.next = p1;
     if (p2) p.next = p2;
-    return tmp.next;
+    return dummy.next;
 };
 // @lc code=end
 
