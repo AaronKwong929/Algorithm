@@ -11,46 +11,24 @@
  * @return {number[]}
  */
 var topKFrequent = function (nums, k) {
-    // // o(nlogn)
-    // let map = new Map(),
-    //     arr = [...new Set(nums)];
-    // nums.map(num => {
-    //     if (map.has(num)) map.set(num, map.get(num) + 1);
-    //     else map.set(num, 1);
-    // });
-    // // 相当于加权排序
-    // return arr.sort((a, b) => map.get(b) - map.get(a)).slice(0, k);
     const map = new Map();
-    nums.map(num => {
-        if (map.has(num)) map.set(num, map.get(num) + 1);
-        else map.set(num, 1);
+    nums.forEach(item => {
+        if (map.has(item)) map.set(item, map.get(item) + 1);
+        else map.set(item, 1);
     });
-
-    // 如果元素数量小于等于 k
-    if (map.size <= k) {
-        return [...map.keys()];
-    }
-
+    if (map.size <= k) return [...map.keys()];
     return bucketSort(map, k);
 };
 
-// 桶排序
-let bucketSort = (map, k) => {
-    let arr = [],
+const bucketSort = (map, k) => {
+    const arr = [],
         res = [];
-    map.forEach((value, key) => {
-        // 利用映射关系（出现频率作为下标）将数据分配到各个桶中
-        if (!arr[value]) {
-            arr[value] = [key];
-        } else {
-            arr[value].push(key);
-        }
+    map.forEach((val, key) => {
+        if (!arr[val]) arr[val] = [key];
+        else arr[val].push(key);
     });
-    // 倒序遍历获取出现频率最大的前k个数
     for (let i = arr.length - 1; i >= 0 && res.length < k; i--) {
-        if (arr[i]) {
-            res.push(...arr[i]);
-        }
+        if (arr[i]) res.push(...arr[i]);
     }
     return res;
 };
