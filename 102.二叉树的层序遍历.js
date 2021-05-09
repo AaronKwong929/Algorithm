@@ -18,22 +18,17 @@
  * @return {number[][]}
  */
 var levelOrder = function (root) {
-    const levels = [];
-    if (!root) return levels;
+    const res = [];
+    if (!root) return res;
 
-    const helper = (node, level) => {
-        if (levels.length === level) {
-            levels.push([]);
-        }
-
-        levels[level].push(node.val);
-
-        if (node.left) helper(node.left, level + 1);
-        if (node.right) helper(node.right, level + 1);
+    const helper = (root, level) => {
+        if (res.length === level) res.push([]);
+        res[level].push(root.val);
+        if (root.left) helper(root.left, level + 1);
+        if (root.right) helper(root.right, level + 1);
     };
 
     helper(root, 0);
-
-    return levels;
+    return res;
 };
 // @lc code=end
