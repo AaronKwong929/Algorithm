@@ -19,9 +19,7 @@
  */
 var maxDepth = function (root) {
     if (!root) return 0;
-    const leftDepth = maxDepth(root.left);
-    const rightDepth = maxDepth(root.right);
-    const childDepth = leftDepth > rightDepth ? leftDepth : rightDepth;
+    const childDepth = Math.max(maxDepth(root.left), maxDepth(root.right));
     return 1 + childDepth;
 };
 // @lc code=end
