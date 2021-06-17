@@ -27,7 +27,7 @@ const symmetric = (left, right) => {
     if (!right) return !left;
     if (left.val !== right.val) return false;
     return (
-        symmetric(left.left, right.right) && symmetric(right.left, left.right)
+        symmetric(left.left, right.right) && symmetric(left.right, right.left)
     );
 };
 // @lc code=end
