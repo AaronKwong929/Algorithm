@@ -19,13 +19,11 @@
  */
 var zigzagLevelOrder = function (root) {
     const res = [];
+    if (!root) return res;
     const helper = (root, i) => {
-        if (!root || root.val === null) return;
         if (!res[i]) res[i] = [];
-
         if (i % 2 === 0) res[i].push(root.val);
         else res[i].unshift(root.val);
-
         if (root.left) helper(root.left, i + 1);
         if (root.right) helper(root.right, i + 1);
     };

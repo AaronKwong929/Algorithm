@@ -20,14 +20,12 @@
 var levelOrder = function (root) {
     const res = [];
     if (!root) return res;
-
-    const helper = (root, level) => {
-        if (res.length === level) res.push([]);
-        res[level].push(root.val);
-        if (root.left) helper(root.left, level + 1);
-        if (root.right) helper(root.right, level + 1);
+    const helper = (root, i) => {
+        if (!res[i]) res[i] = [];
+        res[i].push(root.val);
+        if (root.left) helper(root.left, i + 1);
+        if (root.right) helper(root.right, i + 1);
     };
-
     helper(root, 0);
     return res;
 };
