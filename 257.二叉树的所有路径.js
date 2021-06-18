@@ -48,7 +48,7 @@
  */
 var binaryTreePaths = function (root) {
     const res = [];
-    const helper = (root, path) => {
+    const dfs = (root, path) => {
         if (root) {
             path += root.val.toString();
             if (root.left === null && root.right === null) {
@@ -56,13 +56,13 @@ var binaryTreePaths = function (root) {
                 return;
             } else {
                 path += `->`;
-                helper(root.left, path);
-                helper(root.right, path);
+                dfs(root.left, path);
+                dfs(root.right, path);
             }
         }
     };
 
-    helper(root, ``);
+    dfs(root, ``);
 
     return res;
 };
