@@ -68,21 +68,21 @@
  * @return {boolean}
  */
 var hasPathSum = function (root, targetSum) {
-    if (!root) return [];
-    const res = [];
+    if (!root) return false;
+    let flag = false;
     const dfs = (root, sum, path) => {
         if (!root) return;
-        if (res.length) return; // 如果已经有正确答案提前结束递归
+        if (flag) return; // 如果已经有正确答案提前结束递归
         sum -= root.val;
         path.push(root.val);
         if (!root.left && !root.right && sum === 0) {
-            res.push(path.slice());
+            flag = true;
             return;
         }
         dfs(root.left, sum, path.slice());
         dfs(root.right, sum, path.slice());
     };
     dfs(root, targetSum, []);
-    return res.length > 0;
+    return flag;
 };
 // @lc code=end
