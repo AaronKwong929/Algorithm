@@ -18,15 +18,27 @@
  * @return {number[]}
  */
 var inorderTraversal = function (root) {
-    const res = [];
-    if (!root) return res;
-    const inorder = ({ val, left, right }) => {
-        left && inorder(left);
-        val && res.push(val);
-        right && inorder(right);
-    };
+    // const res = [];
+    // if (!root) return res;
+    // const inorder = ({ val, left, right }) => {
+    //     left && inorder(left);
+    //     val && res.push(val);
+    //     right && inorder(right);
+    // };
 
-    inorder(root);
+    // inorder(root);
+    // return res;
+    const stack = [],
+        res = [];
+    while (root || stack.length) {
+        while (root) {
+            stack.push(root);
+            root = root.left;
+        }
+        root = stack.pop();
+        res.push(root.val);
+        root = root.right
+    }
     return res;
 };
 // @lc code=end

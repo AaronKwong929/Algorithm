@@ -81,14 +81,24 @@
  * @return {number[]}
  */
 var preorderTraversal = function (root) {
-    const res = [];
-    const pre = root => {
-        if (!root) return;
-        res.push(root.val);
-        pre(root.left);
-        pre(root.right);
-    };
-    pre(root);
+    // const res = [];
+    // const pre = root => {
+    //     if (!root) return;
+    //     res.push(root.val);
+    //     pre(root.left);
+    //     pre(root.right);
+    // };
+    // pre(root);
+    // return res;
+    if (!root) return [];
+    const stack = [root],
+        res = [];
+    while (stack.length) {
+        const node = stack.pop();
+        res.push(node.val);
+        if (node.right) stack.push(node.right);
+        if (node.left) stack.push(node.left);
+    }
     return res;
 };
 // @lc code=end

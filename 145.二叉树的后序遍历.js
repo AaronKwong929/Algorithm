@@ -44,14 +44,31 @@
  * @return {number[]}
  */
 var postorderTraversal = function (root) {
-    const res = [];
-    const post = root => {
-        if (!root) return;
-        post(root.left);
-        post(root.right);
-        res.push(root.val);
+    // const res = [];
+    // const post = root => {
+    //     if (!root) return;
+    //     post(root.left);
+    //     post(root.right);
+    //     res.push(root.val);
+    // };
+    // post(root);
+    // return res;
+    const reverse = array => {
+        let res = [];
+        for (let i = array.length - 1; i >= 0; i--) {
+            res.push(array[i]);
+        }
+        return res;
     };
-    post(root);
-    return res;
+    if (!root) return [];
+    const stack = [root],
+        res = [];
+    while (stack.length) {
+        const node = stack.pop();
+        res.push(node.val);
+        if (node.left) stack.push(node.left);
+        if (node.right) stack.push(node.right);
+    }
+    return reverse(res);
 };
 // @lc code=end
