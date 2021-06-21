@@ -19,69 +19,32 @@
  * @return {TreeNode}
  */
 var buildTree = function (preorder, inorder) {
-    if (!preorder.length || !inorder.length) return null;
-    return constructNewNode(
-        preorder,
-        inorder,
-        0,
-        preorder.length,
-        0,
-        inorder.length
-    );
+    const map = new Map();
+    for (let i = 0; i < inorder.length; i++) {
+        map.set(inorder[i], i);
+    }
+    const helper = (preStart, preEnd, inStart, inEnd) => {
+        if (preStart > preEnd) return null;
+        const rootVal = preorder[preStart];
+        const root = new TreeNode(rootVal);
+        const mid = map.get(rootVal);
+        const leftCount = mid - inStart;
+        // 左子树
+        // 前序start：preStart + 1；前序end：preStart + 左子树数量
+        // 中序start：inStart；中序end：mid - 1（根节点前一个）
+        root.left = helper(
+            preStart + 1,
+            preStart + leftCount,
+            inStart,
+            mid - 1
+        );
+        // 右子树
+        // 前序start：preStart + 左子树数量 + 1；前序end：preEnd
+        // 中序start：mid + 1；中序end：inEnd
+        root.right = helper(preStart + leftCount + 1, preEnd, mid + 1, inEnd);
+
+        return root;
+    };
+    return helper(0, preorder.length - 1, 0, inorder.length - 1);
 };
-
-function findInorderIndex(list, target) {
-    if (list.length === 0) {
-        return undefined;
-    }
-    let index;
-    list.forEach((item, i) => {
-        if (item === target) {
-            index = i;
-        }
-    });
-    return index;
-}
-
-function constructNewNode(
-    preorder,
-    inorder,
-    preStart,
-    preLength,
-    inStart,
-    inLength
-) {
-    // 前序列表第一个是树根节点
-    const root = preorder[preStart];
-    // 找到 root 在中序列表的位置，左边是左子树，右边是右子树
-    const inOrderIndex = findInorderIndex(inorder, root);
-
-    const rootNode = new TreeNode(root);
-    // 存在左子树
-    if (inOrderIndex - inStart >= 1) {
-        rootNode.left = constructNewNode(
-            preorder,
-            inorder,
-            preStart + 1, // 前序：左子树位置
-            preStart + (inOrderIndex - inStart), // 前序：左子树长度
-            inStart, // 中序：左子树起始位置
-            inOrderIndex - 1 // 左子树的中序长度
-            
-        );
-    }
-
-    // 存在右子树
-    if (inLength - inOrderIndex >= 1) {
-        rootNode.right = constructNewNode(
-            preorder,
-            inorder
-            // preStart + (inOrderIndex - inStart) + 1, // 右子树的先序起点
-            // preLength, // 右子树的先序总长度
-            // inOrderIndex + 1, // 右子树的中序起点
-            // inLength // 右子树的中序长度
-            
-        );
-    }
-    return root || root === 0 ? rootNode : null;
-}
 // @lc code=end
