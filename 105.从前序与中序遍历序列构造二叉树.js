@@ -24,7 +24,7 @@ var buildTree = function (preorder, inorder) {
         map.set(inorder[i], i);
     }
     const helper = (preStart, preEnd, inStart, inEnd) => {
-        if (preStart > preEnd) return null;
+        if (preStart > preEnd || inStart > inEnd) return null;
         const rootVal = preorder[preStart];
         const root = new TreeNode(rootVal);
         const mid = map.get(rootVal);
@@ -42,7 +42,6 @@ var buildTree = function (preorder, inorder) {
         // 前序start：preStart + 左子树数量 + 1；前序end：preEnd
         // 中序start：mid + 1；中序end：inEnd
         root.right = helper(preStart + leftCount + 1, preEnd, mid + 1, inEnd);
-
         return root;
     };
     return helper(0, preorder.length - 1, 0, inorder.length - 1);
