@@ -28,20 +28,19 @@ var buildTree = function (preorder, inorder) {
         const rootVal = preorder[preStart];
         const root = new TreeNode(rootVal);
         const mid = map.get(rootVal);
-        const leftCount = mid - inStart;
-        // 左子树
-        // 前序start：preStart + 1；前序end：preStart + 左子树数量
-        // 中序start：inStart；中序end：mid - 1（根节点前一个）
+        const leftTreeLength = mid - inStart;
         root.left = helper(
             preStart + 1,
-            preStart + leftCount,
+            preStart + leftTreeLength,
             inStart,
             mid - 1
         );
-        // 右子树
-        // 前序start：preStart + 左子树数量 + 1；前序end：preEnd
-        // 中序start：mid + 1；中序end：inEnd
-        root.right = helper(preStart + leftCount + 1, preEnd, mid + 1, inEnd);
+        root.right = helper(
+            preStart + leftTreeLength + 1,
+            preEnd,
+            mid + 1,
+            inEnd
+        );
         return root;
     };
     return helper(0, preorder.length - 1, 0, inorder.length - 1);
