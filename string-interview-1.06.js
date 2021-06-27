@@ -10,24 +10,38 @@
  * @param {string} S
  * @return {string}
  */
-const compressString = (S) => {
+const compressString = S => {
+    // const { length } = S;
+    // let i = 0,
+    //     j = i + 1,
+    //     result = ``;
+    // while (i < length) {
+    //     let temp = S[i];
+    //     while (S[i] === S[j]) {
+    //         j++;
+    //     }
+    //     result += `${temp}${j - i}`;
+    //     i = j;
+    //     j++;
+
+    //     if (result.length >= length) return S; // 超出长度直接返回S 更快
+    // }
+    // return result;
     const { length } = S;
     let i = 0,
         j = i + 1,
-        result = ``;
+        res = ``;
     while (i < length) {
-        let temp = S[i];
-        while (S[i] === S[j]) {
+        while (s[j] === S[i]) {
             j++;
         }
-        result += `${temp}${j - i}`;
+        result += `${S[i]}${j - i}`;
         i = j;
         j++;
-
-        if (result.length >= length) return S; // 超出长度直接返回S 更快
+        if (res.length >= S) return S;
     }
-    // return result.length < length ? result : S;
-    return result;
+
+    return res;
 };
 
 console.log(compressString(`abbccd`));
