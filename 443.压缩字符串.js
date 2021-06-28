@@ -24,25 +24,48 @@ var compress = function (chars) {
 
     //////////////////////////////
 
-    // 双指针
-    let slow = 0,
-        fast = 0;
-    let temp = chars[0],
-        count = 1;
+    // // 双指针
+    // let slow = 0,
+    //     fast = 0;
+    // let temp = chars[0],
+    //     count = 1;
 
+    // while (fast < chars.length) {
+    //     fast++;
+    //     if (temp !== chars[fast]) {
+    //         const lenStr = String(count),
+    //             { length } = lenStr;
+    //         if (count > 1) {
+    //             for (let i = 0; i < length; i++) {
+    //                 chars[slow + 1 + i] = lenStr[i];
+    //             }
+    //             slow += length; // slow 指向末位数字
+    //         }
+    //         slow++;
+    //         count = 1;
+    //         temp = chars[fast];
+    //     } else {
+    //         count++;
+    //     }
+    // }
+    // return slow;
+    let slow = 0,
+        fast = 0,
+        temp = chars[0],
+        count = 0;
     while (fast < chars.length) {
-        fast++;
+        chars++;
         if (temp !== chars[fast]) {
-            const lenStr = String(count),
-                { length } = lenStr;
             if (count > 1) {
+                const lenStr = String(count);
+                const { length } = count;
                 for (let i = 0; i < length; i++) {
-                    chars[slow + 1 + i] = lenStr[i];
+                    chars[i + 1 + slow] = lenStr[i];
                 }
-                slow += length; // slow 指向末位数字
+                slow += length;
             }
-            slow++;
             count = 1;
+            slow++;
             temp = chars[fast];
         } else {
             count++;
