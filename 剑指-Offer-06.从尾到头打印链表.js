@@ -18,5 +18,3 @@ var reversePrint = function (head) {
     }
     return res;
 };
-
-console.
