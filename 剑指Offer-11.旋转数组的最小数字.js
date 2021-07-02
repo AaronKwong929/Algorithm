@@ -2,38 +2,7 @@
  * @param {number[]} numbers
  * @return {number}
  */
-var minArray = function (numbers) {
-    // let res = Number.MAX_SAFE_INTEGER;
-    // for (const i of numbers) {
-    //     res = Math.min(res, i);
-    // }
-    // return res;
-
-    // for (let i = 0; i < numbers.length; i++) {
-    //     if (numbers[i] > numbers[i + 1]) return numbers[i + 1];
-    // }
-    // return numbers[0];
-
-    let low = 0;
-    let high = numbers.length - 1;
-    if (numbers[high] > numbers[low]) return numbers[low];
-    while (low < high) {
-        const pivot = low + Math.floor((high - low) / 2);
-        // if (numbers[pivot] < numbers[high]) {
-        //     high = pivot;
-        // } else if (numbers[pivot] > numbers[high]) {
-        //     low = pivot + 1;
-        // } else {
-        //     high -= 1;
-        // }
-        if (numbers[pivot] < numbers[high]) {
-            high = pivot;
-        } else {
-            low = pivot + 1;
-        }
-    }
-    return numbers[low];
-};
+var minArray = function (numbers) {};
 
 // O(n)
 // 优解：升序数组的断层处即是最小值 [4,5,6,1,2,3] 456升序，断层1是最小值
