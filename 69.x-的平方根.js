@@ -57,3 +57,4 @@ var mySqrt = function (x) {
 // @lc code=end
 
 // 从0-x找一个数平方等于x值，防止溢出用 mid > x / mid
+// 循环结束条件 left === right + 1，right+1已经在前几轮的循环里被判断为 (right + 1) ^ 2 > mid，所以不返回left，返回right
