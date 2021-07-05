@@ -45,19 +45,4 @@ var mergeTwoLists = function (l1, l2) {
     return dummy.next;
 };
 // @lc code=end
-console.log(
-    JSON.stringify(
-        mergeTwoLists(
-            {
-                val: 1,
-                next: { val: 2, next: { val: 4, next: null } },
-            },
-            {
-                val: 1,
-                next: { val: 3, next: { val: 4, next: null } },
-            }
-        )
-    )
-);
 
-console.log(JSON.stringify(mergeTwoLists()));

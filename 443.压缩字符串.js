@@ -10,62 +10,25 @@
  * @return {number}
  */
 var compress = function (chars) {
-    // let count = 1;
-    // for (let i = 0; i < chars.length; i++) {
-    //     if (chars[i] === chars[i + 1]) {
-    //         count++;
-    //     } else if (count !== 1) {
-    //         chars.splice(i - count + 2, count - 1, ...String(count).split(``));
-    //         i = i - count + 2;
-    //         count = 1;
-    //     }
-    // }
-    // return chars.length;
-
-    //////////////////////////////
-
-    // // 双指针
-    // let slow = 0,
-    //     fast = 0;
-    // let temp = chars[0],
-    //     count = 1;
-
-    // while (fast < chars.length) {
-    //     fast++;
-    //     if (temp !== chars[fast]) {
-    //         const lenStr = String(count),
-    //             { length } = lenStr;
-    //         if (count > 1) {
-    //             for (let i = 0; i < length; i++) {
-    //                 chars[slow + 1 + i] = lenStr[i];
-    //             }
-    //             slow += length; // slow 指向末位数字
-    //         }
-    //         slow++;
-    //         count = 1;
-    //         temp = chars[fast];
-    //     } else {
-    //         count++;
-    //     }
-    // }
-    // return slow;
+    // 双指针
     let slow = 0,
-        fast = 0,
-        temp = chars[0],
-        count = 0;
+        fast = 0;
+    let temp = chars[0],
+        count = 1;
+
     while (fast < chars.length) {
-        chars++;
+        fast++;
         if (temp !== chars[fast]) {
+            const lenStr = String(count),
+                { length } = lenStr;
             if (count > 1) {
-                const lenStr = String(count);
-                const { length } = count;
                 for (let i = 0; i < length; i++) {
-                    chars[i + 1 + slow] = lenStr[i];
+                    chars[slow + 1 + i] = lenStr[i];
                 }
-                slow += length;
+                slow += length; // slow 指向末位数字
             }
-            count = 1;
             slow++;
+            count = 1;
             temp = chars[fast];
         } else {
             count++;

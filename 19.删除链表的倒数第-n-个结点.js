@@ -33,21 +33,3 @@ var removeNthFromEnd = function (head, n) {
     return head;
 };
 // @lc code=end
-
-console.log(
-    JSON.stringify(
-        removeNthFromEnd(
-            {
-                val: 1,
-                next: {
-                    val: 2,
-                    next: {
-                        val: 3,
-                        next: { val: 4, next: { val: 5, next: null } },
-                    },
-                },
-            },
-            2
-        )
-    )
-);
