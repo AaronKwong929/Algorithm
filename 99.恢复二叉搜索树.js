@@ -59,29 +59,23 @@
  * @return {void} Do not return anything, modify root in-place instead.
  */
 var recoverTree = function (root) {
-    let prev = new TreeNode(-Infinity);
-    let err1 = null,
+    let prev = new TreeNode(-Infinity),
+        err1 = null,
         err2 = null;
-
     const inorder = node => {
         if (!node) return;
         inorder(node.left);
-
-        if (prev.val >= node.val && !err1) {
-            err1 = prev; // 第一个错误点
-        }
-        if (prev.val >= node.val && err1) {
-            err2 = node; // 第二个错误点
-        }
+        if (prev.val >= node.val && !err1) err1 = prev;
+        if (prev.val >= node.val && err1) err2 = node;
         prev = node;
-
         inorder(node.right);
     };
     inorder(root);
-
     [err1.val, err2.val] = [err2.val, err1.val];
 };
 // @lc code=end
+
+// NOTE: 这题具体题解写在了个人博客里
 
 // BST 中序遍历的结果是递增数组
 // 中序遍历 - 比较前后节点的值，前 >= 后 就是错误点
