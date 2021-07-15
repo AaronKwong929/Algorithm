@@ -61,21 +61,39 @@
  * @return {boolean}
  */
 var isValidBST = function (root) {
-    if (!root) return false;
-    const res = [];
-    const helper = root => {
-        if (!root) return;
-        helper(root.left);
-        res.push(root.val);
-        helper(root.right);
+    // if (!root) return false;
+    // const res = [];
+    // const helper = root => {
+    //     if (!root) return;
+    //     helper(root.left);
+    //     res.push(root.val);
+    //     helper(root.right);
+    // };
+    // helper(root);
+    // for (let i = 1; i < res.length; i++) {
+    //     if (res[i - 1] < res[i]) continue;
+    //     else return false;
+    // }
+    // return true;
+    const helper = (root, min, max) => {
+        if (!root) return true;
+        if (min && root.val <= min.val) return false;
+        if (max && root.val >= max.val) return false;
+        return helper(root.left, min, root) && helper(root.right, root, max);
     };
-    helper(root);
-    for (let i = 1; i < res.length; i++) {
-        if (res[i - 1] < res[i]) continue;
-        else return false;
-    }
-    return true;
+    return helper(root, null, null);
 };
 // @lc code=end
-const root = { val: 2, left: { val: 1 }, right: { val: 3 } };
-console.log(isValidBST(root));
+
+/**
+ * 个人思路
+ * bst 中序遍历 数组接收
+ * 验证数组是否递增
+ */
+
+/**
+ * 优化思路
+ * 递归
+ * 注意：左子树每一个节点必比根节点小，右子树必比根节点大，传两个辅助参数
+ * 判断左子树必须比根节点小，右子树必须比根节点大
+ */
