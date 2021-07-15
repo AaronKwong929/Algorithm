@@ -1,16 +1,16 @@
 /*
- * @lc app=leetcode.cn id=538 lang=javascript
+ * @lc app=leetcode.cn id=1038 lang=javascript
  *
- * [538] 把二叉搜索树转换为累加树
+ * [1038] 把二叉搜索树转换为累加树
  *
- * https://leetcode-cn.com/problems/convert-bst-to-greater-tree/description/
+ * https://leetcode-cn.com/problems/binary-search-tree-to-greater-sum-tree/description/
  *
  * algorithms
- * Medium (68.70%)
- * Likes:    550
+ * Medium (79.26%)
+ * Likes:    119
  * Dislikes: 0
- * Total Accepted:    97K
- * Total Submissions: 141.1K
+ * Total Accepted:    22.8K
+ * Total Submissions: 28.8K
  * Testcase Example:  '[4,1,6,0,2,5,7,null,null,null,3,null,null,null,8]'
  *
  * 给出二叉 搜索 树的根节点，该树的节点值各不相同，请你将其转换为累加树（Greater Sum Tree），使每个节点 node
@@ -24,8 +24,7 @@
  * 左右子树也必须是二叉搜索树。
  *
  *
- * 注意：本题和 1038:
- * https://leetcode-cn.com/problems/binary-search-tree-to-greater-sum-tree/
+ * 注意：该题目与 538: https://leetcode-cn.com/problems/convert-bst-to-greater-tree/
  * 相同
  *
  *
@@ -61,8 +60,8 @@
  * 提示：
  *
  *
- * 树中的节点数介于 0 和 10^4^ 之间。
- * 每个节点的值介于 -10^4 和 10^4 之间。
+ * 树中的节点数介于 1 和 100 之间。
+ * 每个节点的值介于 0 和 100 之间。
  * 树中的所有值 互不相同 。
  * 给定的树为二叉搜索树。
  *
@@ -82,7 +81,7 @@
  * @param {TreeNode} root
  * @return {TreeNode}
  */
-var convertBST = function (root) {
+var bstToGst = function (root) {
     let sum = 0;
     const helper = root => {
         if (!root) return;
@@ -95,17 +94,3 @@ var convertBST = function (root) {
     return root;
 };
 // @lc code=end
-
-/**
- * 自己的思路
- * 中序遍历获得递增数组
- * 单项累加 slice(index).reduce((a, b) => a + b, 0)
- * 从新数组构建树
- */
-
-/**
- * 优化思路
- * 利用中序递增性质
- * 先遍历右节点 获得降序数列
- * 使用一个累加器将每个节点值累加
- */
