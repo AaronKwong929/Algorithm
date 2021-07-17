@@ -60,20 +60,6 @@
  * @return {number}
  */
 var getMinimumDifference = function (root) {
-    // const arr = [];
-    // let res = Number.MAX_SAFE_INTEGER;
-    // const dfs = root => {
-    //     if (!root) return;
-    //     dfs(root.left);
-    //     arr.push(root.val);
-    //     dfs(root.right);
-    // };
-    // dfs(root);
-    // for (let i = 1; i < arr.length; i++) {
-    //     res = Math.min(res, arr[i] - arr[i - 1]);
-    // }
-    // return res;
-
     let res = Number.MAX_SAFE_INTEGER;
     let pre = -1;
     const dfs = root => {
