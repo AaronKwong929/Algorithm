@@ -94,18 +94,27 @@
 var maxSumBST = function (root) {
     let max = 0;
     const helper = node => {
+        // 空树可看作是BST
         if (!node)
             return [true, Number.MAX_SAFE_INTEGER, Number.MIN_SAFE_INTEGER, 0];
+        // 后续遍历，通过左右子树推导当前节点是不是BST
         const left = helper(node.left);
         const right = helper(node.right);
+
         const res = [];
+        // 左右子树都是BST，当前节点值比左子树节点都大，比右子树节点都小，是BST
         if (left[0] && right[0] && node.val > left[2] && node.val < right[1]) {
             res[0] = true;
+            // 当前节点为BST的最小值
             res[1] = Math.min(left[1], node.val);
+            // 当前节点为BST的最大值
             res[2] = Math.max(right[2], node.val);
+            // 以当前节点为根的BST的累加值
             res[3] = left[3] + right[3] + node.val;
+            // 比对最大值
             max = Math.max(max, res[3]);
         } else res[0] = false;
+        // 非BST不用计算
         return res;
     };
     helper(root);
@@ -113,6 +122,18 @@ var maxSumBST = function (root) {
 };
 // @lc code=end
 
-// 后序遍历减少多嵌套递归
+/**
+ * 个人思路
+ * 遍历节点 判断这个节点是不是二叉树
+ * 如果是的话求出树总值，存入maxSum
+ * 返回maxSum
+ *
+ *
+ * 求值和遍历分别都是递归，递归嵌套递归，时间爆炸
+ */
 
-// res [node为根的树是否是bst， node为根的bst的所有节点中的最小值， node为根的bst的所有节点的最大值， node为根的bst的所有节点和]
+/**
+ * 优化思路（答案）
+ * 后序遍历减少多嵌套递归
+ * res [node为根的树是否是bst， node为根的bst的所有节点中的最小值， node为根的bst的所有节点的最大值， node为根的bst的所有节点和]
+ */
