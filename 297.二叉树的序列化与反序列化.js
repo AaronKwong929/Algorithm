@@ -20,16 +20,17 @@
  * @return {string}
  */
 var serialize = function (root) {
-    const res = [],
-        dfs = node => {
-            if (node === null) res.push(null);
-            else {
-                res.push(node.val);
-                dfs(node.left);
-                dfs(node.right);
-            }
-        };
-    dfs(root);
+    const res = [];
+    const helper = node => {
+        if (node === null) {
+            res.push(null);
+            return;
+        }
+        res.push(node.val);
+        helper(node.left);
+        helper(node.right);
+    };
+    helper(root);
     return res;
 };
 
@@ -41,18 +42,16 @@ var serialize = function (root) {
  */
 var deserialize = function (data) {
     if (data.length === 0) return null;
-    let i = 0;
-    const struct = () => {
-        if (i >= data.length) return null;
-        const val = data[i];
-        i++;
+    const helper = () => {
+        const val = data.shift();
         if (val === null) return null;
         const node = new TreeNode(val);
-        node.left = struct();
-        node.right = struct();
+        node.left = helper();
+        node.right = helper();
         return node;
     };
-    return struct();
+
+    return helper();
 };
 
 // /**
