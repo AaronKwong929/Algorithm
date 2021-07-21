@@ -59,7 +59,6 @@ var deserialize = function (data) {
         const root = new TreeNode(val);
         root.right = helper();
         root.left = helper();
-
         return root;
     };
     return helper();
