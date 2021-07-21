@@ -57,7 +57,7 @@
  * @return {string[][]}
  */
 var solveNQueens = function (n) {
-    const board = new Array(n).fill([]).map(() => new Array(n).fill('.'));
+    const board = new Array(n).fill([]).map(() => new Array(n).fill(`.`));
     // const board = new Array(n).fill(new Array(n).fill(`.`)); // 不要用这种，这种是浅拷贝
     const res = [];
     const helper = row => {
@@ -65,7 +65,7 @@ var solveNQueens = function (n) {
             res.push(transformBoard(board));
             return;
         }
-        const len = board[row].length;
+        const len = board.length;
         for (let col = 0; col < len; col++) {
             if (isValid(row, col)) {
                 board[row][col] = `Q`;
