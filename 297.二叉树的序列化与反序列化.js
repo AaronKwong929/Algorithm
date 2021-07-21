@@ -21,14 +21,14 @@
  */
 var serialize = function (root) {
     const res = [];
-    const helper = node => {
-        if (node === null) {
+	const helper = node => {
+		if (node === null) {
             res.push(null);
             return;
         }
-        res.push(node.val);
         helper(node.left);
         helper(node.right);
+        res.push(node.val);
     };
     helper(root);
     return res;
@@ -41,16 +41,27 @@ var serialize = function (root) {
  * @return {TreeNode}
  */
 var deserialize = function (data) {
+    // if (data.length === 0) return null;
+    // const helper = () => {
+    //     const val = data.shift();
+    //     if (val === null) return null;
+    //     const node = new TreeNode(val);
+    //     node.left = helper();
+    //     node.right = helper();
+    //     return node;
+    // };
+
+    // return helper();
     if (data.length === 0) return null;
     const helper = () => {
-        const val = data.shift();
+        const val = data.pop();
         if (val === null) return null;
-        const node = new TreeNode(val);
-        node.left = helper();
-        node.right = helper();
-        return node;
-    };
+        const root = new TreeNode(val);
+        root.right = helper();
+        root.left = helper();
 
+        return root;
+    };
     return helper();
 };
 
@@ -59,3 +70,24 @@ var deserialize = function (data) {
 //  * deserialize(serialize(root));
 //  */
 // @lc code=end
+
+/**
+ * 思路：前序遍历
+ *
+ * 序列化遇到null时往res push null
+ *
+ * 反序列化时因为前序遍历数组有存null位置
+ */
+
+/**
+ * 其他思路：
+ *
+ * 后续遍历
+ * 序列化差别不大
+ * 反序列化需要注意是从末尾开始取元素
+ * 先构造右子树，再构造左子树
+ * 
+ * 中序：无法实现
+ * 
+ * 层序：懒得想
+ */
