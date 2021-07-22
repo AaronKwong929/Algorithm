@@ -73,34 +73,38 @@
  * @return {string}
  */
 var smallestFromLeaf = function (root) {
-    const res = [];
-    const reverse = string => {
-        let result = ``;
-        for (let i of string) {
-            result = i + result;
-        }
-        return result;
-    };
-    const dfs = (root, path) => {
+    let res = ``;
+
+    const helper = (root, path) => {
         if (!root) return;
-        path += String.fromCharCode(root.val + 97);
+        path = String.fromCharCode(root.val + 97) + path;
         if (root.left === null && root.right === null) {
-            res.push(reverse(path));
+            if (!res) res = path;
+            else {
+                if (path < res) res = path;
+            }
             return;
         }
-        dfs(root.left, path);
-        dfs(root.right, path);
+        helper(root.left, path);
+        helper(root.right, path);
     };
-    dfs(root, ``);
-    res.sort((a, b) => {
-        if (a < b) {
-            return -1;
-        }
-        if (a > b) {
-            return 1;
-        }
-        return 0;
-    });
-    return res[0];
+
+    helper(root, ``);
+    return res;
 };
 // @lc code=end
+
+/**
+ * 第一次的思路：dfs遍历获得所有路径 res
+ *              然后对res排序，返回第一个
+ */
+
+/**
+ * 优化思路：
+ * 只对每一次结果进行比较
+ * res初始值为空；
+ * 如果res为空直接将第一个结果赋值给res
+ * 然后res进行比对，有更小的值就直接替换
+ *
+ * 直接用 path = String.fromCharCode(xxx + 97) + path 就可以实现倒置
+ */
