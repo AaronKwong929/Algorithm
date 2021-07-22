@@ -77,11 +77,7 @@ var solveNQueens = function (n) {
     const transformBoard = board => {
         const res = [];
         board.forEach(row => {
-            let rowStr = ``;
-            row.forEach(value => {
-                rowStr += value;
-            });
-            res.push(rowStr);
+            res.push(row.join(``));
         });
         return res;
     };
