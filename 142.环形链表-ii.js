@@ -84,13 +84,27 @@
  * @return {ListNode}
  */
 var detectCycle = function (head) {
-    const set = new Set();
-    while (head && head.next) {
-        if (set.has(head)) return head;
-        set.add(head);
-        head = head.next;
+    // const set = new Set();
+    // while (head && head.next) {
+    //     if (set.has(head)) return head;
+    //     set.add(head);
+    //     head = head.next;
+    // }
+    // return null;
+    let fast = head,
+        slow = head;
+    while (fast && fast.next) {
+        fast = fast.next.next;
+        slow = slow.next;
+        if (fast === slow) break;
     }
-    return null;
+    if (!fast || !fast.next) return null;
+    slow = head;
+    while (slow !== fast) {
+        slow = slow.next;
+        fast = fast.next;
+    }
+    return slow;
 };
 // @lc code=end
 
@@ -104,5 +118,12 @@ var detectCycle = function (head) {
 /**
  * 优化思路：
  * https://labuladong.gitbook.io/algo/mu-lu-ye-1/mu-lu-ye-3/shuang-zhi-zhen-ji-qiao
- * 有点看不懂
+ * 双指针
+ * 先判断有没有环
+ * 有环的话 快指针走了2k步，慢指针走了k步
+ * 快指针一直在环里转圈圈，快比慢多走k步，k是环长整数倍（考虑环长为1的情况去理解）
+ * 假设相遇点距离环起点为m
+ * 从起点到相遇点的距离为 k - m（右边减m）
+ * 从相遇点移动 k - m 也会到达起点（左边减m）
+ * 同时移动后会在起点停止循环
  */
