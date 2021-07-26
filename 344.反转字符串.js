@@ -49,7 +49,7 @@ var reverseString = function (s) {
 
     let left = 0,
         right = s.length - 1;
-    while (left < right) {
+    while (left <= right) {
         [s[left], s[right]] = [s[right], s[left]];
         left++;
         right--;
@@ -57,4 +57,8 @@ var reverseString = function (s) {
     return s;
 };
 // @lc code=end
-// 双指针  / 折半
+/**
+ * 第一思路：折半循环
+ * 
+ * 第二思路：二分查找
+ */

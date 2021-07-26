@@ -18,14 +18,11 @@
  * @return {ListNode}
  */
 var removeNthFromEnd = function (head, n) {
-    let fast = head,
-        slow = head;
-    while (n) {
-        fast = fast.next;
-        n--;
-    }
+    let slow = head,
+        fast = head;
+    while (n--) fast = fast.next;
     if (!fast) return head.next;
-    while (fast.next) {
+    while (fast && fast.next) {
         fast = fast.next;
         slow = slow.next;
     }
@@ -33,3 +30,12 @@ var removeNthFromEnd = function (head, n) {
     return head;
 };
 // @lc code=end
+
+/**
+ * 快指针先移动n个位置
+ * 如果此时快指针已经是null，证明n大于整个链表的长度
+ * 此时直接移除头节点
+ * 
+ * 快慢指针同时移动
+ * 快指针移动结束时慢指针对应被删除结点的前结点
+ */

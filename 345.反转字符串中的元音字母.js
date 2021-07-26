@@ -48,7 +48,7 @@ var reverseVowels = function (s) {
     let left = 0,
         right = s.length - 1;
     const res = s.split(``);
-    while (left < right) {
+    while (left <= right) {
         if (!map.includes(res[left])) {
             left++;
             continue;
