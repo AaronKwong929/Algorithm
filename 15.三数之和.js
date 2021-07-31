@@ -22,21 +22,12 @@ var threeSum = function (nums) {
                 res.push([nums[i], nums[left], nums[right]]);
                 const leftValue = nums[left],
                     rightValue = nums[right];
-                while (left < length && nums[left] === leftValue) {
-                    left++;
-                }
-                while (right > left && nums[right] === rightValue) {
-                    right--;
-                }
-            } else if (sum < 0) {
-                left++;
-            } else {
-                right--;
-            }
+                while (left < length && nums[left] === leftValue) left++;
+                while (right > left && nums[right] === rightValue) right--;
+            } else if (sum < 0) left++;
+            else right--;
         }
-        while (nums[i] === nums[i + 1] && i < length - 1) {
-            i++;
-        }
+        while (nums[i] === nums[i + 1] && i < length - 1) i++;
     }
     return res;
 };
