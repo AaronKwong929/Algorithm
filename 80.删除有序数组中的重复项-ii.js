@@ -83,7 +83,6 @@ var removeDuplicates = function (nums) {
     while (fast < length) {
         if (nums[fast] !== nums[slow - 2]) {
             nums[slow++] = nums[fast];
-            console.log(nums);
         }
         fast++;
     }
