@@ -18,27 +18,16 @@
  * @return {TreeNode}
  */
 var sortedArrayToBST = function (nums) {
-    return initTreeNodes(nums, 0, nums.length - 1);
+    return helper(nums, 0, nums.length - 1);
 };
 
-const initTreeNodes = (arr, start, end) => {
-    // if (start <= end) {
-    //     const mid = start + parseInt((end - start) / 2, 10);
-    //     const root = new TreeNode(arr[mid]);
-    //     root.left = initTreeNodes(arr, mid - 1, start);
-    //     root.right = initTreeNodes(arr, end, mid + 1);
-    //     return root;
-    // } else {
-    //     return null;
-    // }
+const helper = (arr, start, end) => {
     if (start <= end) {
         const mid = start + Math.floor((end - start) / 2);
         const root = new TreeNode(arr[mid]);
-        root.left = initTreeNodes(arr, start, mid - 1);
-        root.right = initTreeNodes(arr, mid + 1, end);
+        root.left = helper(arr, start, mid - 1);
+        root.right = helper(arr, mid + 1, end);
         return root;
-    } else {
-        return null;
-    }
+    } else return null;
 };
 // @lc code=end
