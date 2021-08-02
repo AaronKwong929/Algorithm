@@ -104,4 +104,3 @@ var solveNQueens = function (n) {
     return res;
 };
 // @lc code=end
-console.log(solveNQueens(5).length);
