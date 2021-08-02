@@ -61,11 +61,12 @@ var solveNQueens = function (n) {
     // const board = new Array(n).fill(new Array(n).fill(`.`)); // 不要用这种，这种是浅拷贝
     const res = [];
     const helper = row => {
-        if (row === board.length) {
+        const len = board.length;
+        if (row === len) {
             res.push(transformBoard(board));
             return;
         }
-        const len = board.length;
+
         for (let col = 0; col < len; col++) {
             if (isValid(row, col)) {
                 board[row][col] = `Q`;
@@ -74,6 +75,7 @@ var solveNQueens = function (n) {
             }
         }
     };
+
     const transformBoard = board => {
         const res = [];
         board.forEach(row => {
@@ -84,12 +86,15 @@ var solveNQueens = function (n) {
 
     const isValid = (row, col) => {
         const len = board.length;
+        // 当前竖行有无 Q
         for (let i = 0; i < len; i++) {
             if (board[i][col] === `Q`) return false;
         }
+        // 当前格左上方直线有无 Q
         for (let i = row - 1, j = col - 1; i >= 0 && j >= 0; i--, j--) {
             if (board[i][j] === `Q`) return false;
         }
+        // 当前格右上方有无 Q
         for (let i = row - 1, j = col + 1; i >= 0 && j < len; i--, j++) {
             if (board[i][j] === `Q`) return false;
         }
@@ -99,4 +104,4 @@ var solveNQueens = function (n) {
     return res;
 };
 // @lc code=end
-console.log(solveNQueens(8));
+console.log(solveNQueens(5).length);
