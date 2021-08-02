@@ -65,11 +65,13 @@
  */
 var minEatingSpeed = function (piles, h) {
     let left = 1,
-        right = Math.pow(10, 9) + 1;
+        right = Math.pow(10, 9) + 1; // 最小速度 1根/小时，最大速度就是 piles 的最大值，10^9，+1用左闭右开区间
+    // left < right & left = mid + 1，right = mid
     while (left < right) {
         const mid = left + ((right - left) >> 2);
+        // 如果得出当前需要的小时数大于h（保安回来的时间）即要加快速度，left = mid + 1
         if (f(piles, mid) > h) left = mid + 1;
-        else right = mid;
+        else right = mid; // 当前需要小时数小于h（保安回来的时间），收紧右侧区间 right = mid，找到最左侧的值
     }
     return left;
 };
@@ -77,9 +79,33 @@ var minEatingSpeed = function (piles, h) {
 const f = (piles, x) => {
     let hours = 0;
     for (let i = 0; i < piles.length; i++) {
-        hours += Math.floor(piles[i] / x);
-        if (piles[i] % x > 0) hours++;
+        // 以 x 的速度去吃当前 pile[i] 的香蕉，需要的小时数
+        hours += Math.ceil(piles[i] / x);
     }
     return hours;
 };
 // @lc code=end
+
+/**
+ * 关键点1：left 和 right 的判断，最小速度1，最大速度每小时吃一堆，
+ * 所以left = 1，right = 香蕉数组最大值
+ * 可以是O(n)遍历数组获得最大值，也可以看题目提示，1 <= piles[i] <= 10^9
+ * right = Math.pow(10, 9) + 1
+ * +1决定左闭右开；left < right；left = mid + 1, right = mid
+ *
+ * 关键点2：写出 关于 x 的单调函数 f(x)
+ * 以 x 为吃香蕉的速度
+ * 求吃掉全部香蕉的时间
+ * Math.ceil(piles[i] / x) 求得总共需要多少小时
+ */
+
+/**
+ * 写类似题目的时候，输入的第二个参数抽象为 f(x) 要得出的结果
+ * 类似本题输入的第二个参数小时，这个小时就可以用在f(x)的返回值上
+ * 然后去做二分判断
+ */
+
+/**
+ * 类似题目 1011
+ * 参考出处 https://labuladong.gitbook.io/algo/mu-lu-ye-1/mu-lu-ye-3/er-fen-yun-yong#li-ti-yi-ke-ke-chi-xiang-jiao
+ */
