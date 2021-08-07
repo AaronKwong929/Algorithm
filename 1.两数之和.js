@@ -65,11 +65,27 @@
  * @return {number[]}
  */
 var twoSum = function (nums, target) {
-    const hash = new Map();
-    for (let i = 0; i < nums.length; i++) {
-        if (hash.has(target - nums[i])) return [hash.get(target - nums[i]), i];
-        hash.set(nums[i], i);
+    // const hash = new Map();
+    // for (let i = 0; i < nums.length; i++) {
+    //     if (hash.has(target - nums[i])) return [hash.get(target - nums[i]), i];
+    //     hash.set(nums[i], i);
+    // }
+    // const res = [];
+    nums.sort((a, b) => a - b);
+    let low = 0,
+        high = nums.length - 1;
+    while (low < high) {
+        let left = nums[low],
+            right = nums[high],
+            sum = left + right;
+        if (sum === target) {
+            return [low, high];
+            // while (low < high && nums[low] === left) low++;
+            // while (low < high && nums[high] === right) high--;
+        } else if (sum < target) low++;
+        else high--;
     }
+    // return res;
 };
 // @lc code=end
 console.log(twoSum([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 150));
