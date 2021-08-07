@@ -105,6 +105,6 @@ console.log(maxProfit(2, []));
  *             = max(0, -Infinity + price[i])
  *             = 0
  * dp[i][k][1] = max(dp[i - 1][k][1], dp[i - 1][k][0] - price[i])
- *             = max(-Infinity, 0-price[i])
+ *             = max(-Infinity, 0 - price[i])
  *             = -price[i]
  */
