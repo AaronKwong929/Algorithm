@@ -76,13 +76,13 @@
  * @return {number}
  */
 var removeDuplicates = function (nums) {
-    const { length } = nums;
-    if (length < 1) return length;
+    if (nums.length < 1) return nums.length;
     let slow = 1,
         fast = 1;
-    while (fast < length) {
+    while (fast < nums.length) {
         if (nums[fast] !== nums[slow - 1]) {
-            nums[slow++] = nums[fast];
+            nums[slow] = nums[fast];
+            slow++;
         }
         fast++;
     }
