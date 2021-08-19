@@ -28,17 +28,6 @@ var reverseList = function (head) {
     }
     return pre;
 
-    if (!head || !head.next) return head;
-    let next = head.next;
-    head.next = null;
-    while (next !== null) {
-        const temp = next.next;
-        next.next = head;
-        head = next;
-        next = temp;
-    }
-    return head;
-
     // 递归
     if (!head || !head.next) return head;
     let last = null;
@@ -53,4 +42,7 @@ var reverseList = function (head) {
 };
 // @lc code=end
 
+// 可以看东哥解析
 // https://labuladong.gitbook.io/algo/mu-lu-ye-1/mu-lu-ye/di-gui-fan-zhuan-lian-biao-de-yi-bu-fen
+
+// 博客也写了关于反转链表的
