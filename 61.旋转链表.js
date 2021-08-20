@@ -57,8 +57,41 @@
  * @return {ListNode}
  */
 var rotateRight = function (head, k) {
-  if (k === 0 || !head || !head.next) return head;
-  let p = head;
-  while (p) p = p.next;
+    if (k === 0 || !head || !head.next) return head;
+    let len = 0;
+    let tail;
+    let cur = head;
+
+    while (cur.next) {
+        len++;
+        cur = cur.next;
+    }
+    len++;
+    cur.next = head; // 连起来
+
+    cur = head;
+    let move = len - (k % len);
+    while (move) {
+        tail = cur;
+        cur = cur.next;
+        move--;
+    }
+    tail.next = null;
+    return cur;
 };
 // @lc code=end
+
+console.log(
+    JSON.stringify(
+        rotateRight(
+            {
+                val: 1,
+                next: {
+                    val: 2,
+                    next: { val: 3, next: { val: 4, next: { val: 5 } } },
+                },
+            },
+            2
+        )
+    )
+);

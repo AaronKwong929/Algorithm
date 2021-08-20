@@ -61,6 +61,7 @@ var permute = function (nums) {
         // 终止条件，路径和输出数组同长度，已遍历完成
         if (path.length === nums.length) {
             res.push(path.slice());
+            return;
         }
         for (const i of nums) {
             // 排除当前已经选择过的路径
