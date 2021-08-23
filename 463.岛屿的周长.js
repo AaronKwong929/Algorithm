@@ -79,3 +79,6 @@ var islandPerimeter = function (grid) {
     return count * 4 - edge * 2;
 };
 // @lc code=end
+
+// 从[0, 0]开始，每块陆地只用算右边和下边是不是陆地，是的话edge++
+// 周长 = count * 4 - edge * 2
