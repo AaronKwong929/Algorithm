@@ -7,14 +7,10 @@ var minArray = function (numbers) {
     let left = 0,
         right = length - 1;
     if (numbers[0] < numbers[length - 1]) return numbers[0];
+    if (numbers.length === 1) return numbers[0]
     while (left <= right) {
-        const mid = left + ((right - left) >> 1);
-        if (numbers[mid] > numbers[mid] + 1) return numbers[mid + 1];
-        else if (numbers[mid] < numbers[mid - 1]) return numbers[mid];
-        else if (numbers[mid] > numbers[left]) left = mid + 1;
-        else right = mid - 1;
+        
     }
-    return numbers[left];
 };
 
 // O(n)
